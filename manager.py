@@ -147,6 +147,7 @@ class Element(pygame.sprite.Sprite):
     def __init__(self, icon, position):
         super().__init__()
         self.image = pygame.image.load(icon).convert_alpha()
+        self.image.set_colorkey((255,255,255))
         self.rect = self.image.get_rect()
         self.rect.topleft = position         # 左上角坐标
         self.speed = [0, 0]
@@ -349,11 +350,11 @@ class Manager:
             self.draw_task(36, 2, (300, 90), (330, 35), (360, 60))
             self.draw_task(36, 0, (500, 90), (530, 35), (560, 60))
         elif self.level == 8:
-            self.draw_task(15, 6)
+            self.draw_task(36, 1)
         elif self.level == 9:
-            self.draw_task(49, 6)
+            self.draw_task(36, 1)
         else:
-            self.draw_task(39, 6)
+            self.draw_task(36, 1)
 
         if self.selected != [-1, -1]:
             frame_sprite = Element(Element.frame, Manager.rc_xy(self.selected[0], self.selected[1]))
@@ -1004,17 +1005,17 @@ class Manager:
             elif level == 8:
                 self.__init__(7, 8)
                 row, col = self.row, self.col
-                for i in range(row+2, row+5):
-                    for j in range(col+1, col+6):
-                        self.ice_list[i][j] = 1
+                #for i in range(row+2, row+5):
+                #    for j in range(col+1, col+6):
+                        #self.ice_list[i][j] = 1
                 self.init_step = 21
             elif level == 9:
                 self.__init__(9, 9)
                 row, col = self.row, self.col
                 self.animal[row][col+4] = self.animal[row+4][col] = self.animal[row+4][col+8] = self.animal[row+8][col+4] = -1
-                for i in range(row+1, row+8):
-                    for j in range(col+1, col+8):
-                        self.ice_list[i][j] = 1
+                #for i in range(row+1, row+8):
+                #    for j in range(col+1, col+8):
+                        #self.ice_list[i][j] = 1
                 self.init_step = 35
             else:
                 self.__init__(9, 9)
@@ -1029,9 +1030,9 @@ class Manager:
                 self.animal[row+2][col+1] = self.animal[row+3][col+1] = self.animal[row+2][col+3] = self.animal[row+3][col+3] =\
                     self.animal[row+2][col+5] = self.animal[row+3][col+5] = self.animal[row+2][col+7] = \
                     self.animal[row+3][col+7] = self.animal[row+8][col] = self.animal[row+8][col+8] = -1
-                for i in range(row+4, row+8):
-                    for j in range(col, col+9):
-                        self.ice_list[i][j] = 1
+                #for i in range(row+4, row+8):
+                #    for j in range(col, col+9):
+                        #self.ice_list[i][j] = 1
                 self.ice_list[row+2][col+4] = self.ice_list[row+3][col+2] = self.ice_list[row+3][col+4] = \
                     self.ice_list[row+3][col+6] = 1
                 self.init_step = 40
@@ -1093,17 +1094,17 @@ class Manager:
                 self.num_add()
 
         elif self.level == 8:
-            if self.ice_num >= 15: 
+            if self.animal_num[2] >= 36: 
                 self.type = 1                         # 过关
                 self.num_add()
 
         elif self.level == 9:
-            if self.ice_num >= 49:  
+            if self.animal_num[2] >= 36:  
                 self.type = 1                         # 过关
                 self.num_add()
 
         else:
-            if self.ice_num >= 39:  
+            if self.animal_num[2] >= 36:  
                 self.type = 1                         # 过关
                 self.num_add()
 
