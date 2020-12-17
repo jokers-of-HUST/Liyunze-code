@@ -28,10 +28,10 @@ class Tree(pygame.sprite.Sprite):
     energy_num = 'pic2/energy_num.png'  # 精力
     money = 'pic2/money.png'   # 银币
     energy_buy = 'pic2/energy_buy.png'   # 购买精力
-    x, y = 100, 200
-    h = 200
-    position = ([x, y], [x+100, y], [x+100*2, y], [x+100*3, y], [x+100*4, y], [x+100*5, y], \
-                [x, y+h], [x+100, y+h], [x+100*2, y+h], [x+100*3, y+h], [x+100*4, y+h], [x+100*5, y+h])   # 果子坐标组
+    x, y = 100, 150
+    h = 150
+    position = ([x, y], [x+h, y], [x+h*2, y], [x+h*3, y], [x+h*4, y],  \
+                [x, y+h], [x+h, y+h], [x+h*2, y+h], [x+h*3, y+h], [x+h*4, y+h], [x+h*5, y+h] , [x+h*6, y+h])   # 果子坐标组
     energy_num_position = (15, 70)  # 精力坐标
     energy_buy_position = (250, 400)
 
@@ -147,7 +147,7 @@ class Element(pygame.sprite.Sprite):
     def __init__(self, icon, position):
         super().__init__()
         self.image = pygame.image.load(icon).convert_alpha()
-        self.image.set_colorkey((255,255,255))
+        #self.image.set_colorkey((255,255,255))
         self.rect = self.image.get_rect()
         self.rect.topleft = position         # 左上角坐标
         self.speed = [0, 0]
@@ -350,11 +350,11 @@ class Manager:
             self.draw_task(36, 2, (300, 90), (330, 35), (360, 60))
             self.draw_task(36, 0, (500, 90), (530, 35), (560, 60))
         elif self.level == 8:
-            self.draw_task(36, 1)
+            self.draw_task(15, 6)
         elif self.level == 9:
-            self.draw_task(36, 1)
+            self.draw_task(49, 6)
         else:
-            self.draw_task(36, 1)
+            self.draw_task(40, 6)
 
         if self.selected != [-1, -1]:
             frame_sprite = Element(Element.frame, Manager.rc_xy(self.selected[0], self.selected[1]))
@@ -1005,17 +1005,17 @@ class Manager:
             elif level == 8:
                 self.__init__(7, 8)
                 row, col = self.row, self.col
-                #for i in range(row+2, row+5):
-                #    for j in range(col+1, col+6):
-                        #self.ice_list[i][j] = 1
+                for i in range(row+2, row+5):
+                    for j in range(col+1, col+6):
+                        self.ice_list[i][j] = 1
                 self.init_step = 21
             elif level == 9:
                 self.__init__(9, 9)
                 row, col = self.row, self.col
                 self.animal[row][col+4] = self.animal[row+4][col] = self.animal[row+4][col+8] = self.animal[row+8][col+4] = -1
-                #for i in range(row+1, row+8):
-                #    for j in range(col+1, col+8):
-                        #self.ice_list[i][j] = 1
+                for i in range(row+1, row+8):
+                    for j in range(col+1, col+8):
+                        self.ice_list[i][j] = 1
                 self.init_step = 35
             else:
                 self.__init__(9, 9)
@@ -1030,9 +1030,9 @@ class Manager:
                 self.animal[row+2][col+1] = self.animal[row+3][col+1] = self.animal[row+2][col+3] = self.animal[row+3][col+3] =\
                     self.animal[row+2][col+5] = self.animal[row+3][col+5] = self.animal[row+2][col+7] = \
                     self.animal[row+3][col+7] = self.animal[row+8][col] = self.animal[row+8][col+8] = -1
-                #for i in range(row+4, row+8):
-                #    for j in range(col, col+9):
-                        #self.ice_list[i][j] = 1
+                for i in range(row+4, row+8):
+                    for j in range(col, col+9):
+                        self.ice_list[i][j] = 1
                 self.ice_list[row+2][col+4] = self.ice_list[row+3][col+2] = self.ice_list[row+3][col+4] = \
                     self.ice_list[row+3][col+6] = 1
                 self.init_step = 40
@@ -1094,17 +1094,17 @@ class Manager:
                 self.num_add()
 
         elif self.level == 8:
-            if self.animal_num[2] >= 36: 
+            if self.ice_num >= 15: 
                 self.type = 1                         # 过关
                 self.num_add()
 
         elif self.level == 9:
-            if self.animal_num[2] >= 36:  
+            if self.ice_num >= 49:  
                 self.type = 1                         # 过关
                 self.num_add()
 
         else:
-            if self.animal_num[2] >= 36:  
+            if self.ice_num >= 40:  
                 self.type = 1                         # 过关
                 self.num_add()
 
